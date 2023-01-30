@@ -1,5 +1,4 @@
 import tkinter as tk
-# from tkinter import ttk
 import ttkbootstrap as ttk
 
 
@@ -25,7 +24,7 @@ class Calculator(tk.Frame):
         self.equation = tk.StringVar()
         self.entry_value = ''
 
-        entry = ttk.Entry(master,  bootstyle="dark", font=8,
+        entry = ttk.Entry(master,  bootstyle="dark", font=18,
                           textvariable=self.equation)
         entry.grid(row=0, column=0, columnspan=3,
                    sticky="ew", ipady=8, padx=(4, 2), pady=2)
@@ -99,7 +98,7 @@ class Calculator(tk.Frame):
 root = tk.Tk()
 root.iconbitmap('./images/favicon.ico')
 style = ttk.Style('united')
-style.configure("TButton", font=8)
+style.configure("TButton", font=12)
 
 calc = Calculator(root)
 root.mainloop()
