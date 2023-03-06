@@ -50,6 +50,8 @@
 # مجموع اعداد زوج را پرینت کن
 
 # Basic comparisons
+a = 4
+b = 5
 if a < b:
     print("a is less than b")
 if a > b:
