@@ -20,3 +20,9 @@ for line in bitmap.splitlines():
         else:
             print(message[index % len(message)], end='')
     print()
+
+#  با کمک ترتل، شش ضلعی بکش
+# که هر یک از خط های آن فقط رنگ های
+# سبز قرمز آبی را داشته باشند
+
+COLOR = ['red', 'green', 'blue']
