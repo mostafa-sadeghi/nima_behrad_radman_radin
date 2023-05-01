@@ -91,11 +91,11 @@ while True:
             logo[Y] += 1
     bext.goto(5, 0)
     bext.fg('white')
-    print('Corner bounces:', cornerBounces, end='')
-    for logo in logos:
-        bext.goto(logo[X], logo[Y])
-        bext.fg(logo[COLOR])
-        print('DVD', end='')
-    bext.goto(0, 0)
+    print('Corner bounces:', cornerBounces)
+    # for logo in logos:
+    bext.goto(logo[X], logo[Y])
+    bext.fg(logo[COLOR])
+    print('DVD', end='')
+    # bext.goto(0, 0)
     sys.stdout.flush()
     time.sleep(PAUSE_AMOUNT)
