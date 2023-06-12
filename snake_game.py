@@ -1,112 +1,46 @@
-import turtle
-import time
-from random import randint
-
+from snake_game_utils import make_screen, make_turtle_object,\
+    change_food_pos, move_snake, go_up, go_down, go_right, go_left,\
+    reset, wait, eat_apple, move_snake_bodies, check_body_collisions
 
 snake_body = []
-
-
-def make_turtle_object(color, shape):
-    turtle_object = turtle.Turtle()
-    turtle_object.speed("fastest")
-    turtle_object.direction = "none"
-    turtle_object.shape(shape)
-    turtle_object.color(color)
-    turtle_object.penup()
-    return turtle_object
-
-
-def change_food_pos():
-    food_x_position = randint(-240, 240)
-    food_y_position = randint(-240, 240)
-    food.setposition(food_x_position, food_y_position)
-
-
-def go_up():
-    if head.direction != "down":
-        head.direction = "up"
-
-
-def go_down():
-    if head.direction != "up":
-        head.direction = "down"
-
-
-def go_right():
-    if head.direction != "left":
-        head.direction = "right"
-
-
-def go_left():
-    if head.direction != "right":
-        head.direction = "left"
-
-
-def move_snake():
-    if head.direction == "up":
-        y = head.ycor()
-        head.sety(y + 20)
-
-    if head.direction == "down":
-        y = head.ycor()
-        head.sety(y - 20)
-    if head.direction == "right":
-        x = head.xcor()
-        head.setx(x + 20)
-
-    if head.direction == "left":
-        x = head.xcor()
-        head.setx(x - 20)
-
-
-win = turtle.Screen()
-win.title("Snake Game")
-win.bgcolor("black")
-win.setup(width=600, height=600)
-win.tracer(0)
-
+score = 0
+high_score = 0
+win = make_screen()
 head = make_turtle_object("blue", "square")
-
 food = make_turtle_object("red", "circle")
-change_food_pos()
+change_food_pos(food)
 
+pen = make_turtle_object(color="white")
+pen.hideturtle()
+pen.goto(0, 260)
+pen.write(f"Score : {score}, High Score: {high_score}",
+          align="center", font=80)
+
+border_pen = make_turtle_object(color="white")
+border_pen.hideturtle()
+border_pen.goto(-300,300)
+border_pen.pensize(20)
+border_pen.pendown()
+for i in range(4):
+    border_pen.forward(595)
+    border_pen.right(90)
 
 win.listen()
-win.onkey(go_up, "Up")
-win.onkey(go_down, "Down")
-win.onkey(go_right, "Right")
-win.onkey(go_left, "Left")
-
-
-def reset():
-    time.sleep(0.5)
-    head.goto(0, 0)
-    head.direction = ""
-    for body in snake_body:
-        body.ht()
-    snake_body.clear()
-
+win.onkey(lambda: go_up(head), "Up")
+win.onkey(lambda: go_down(head), "Down")
+win.onkey(lambda: go_right(head), "Right")
+win.onkey(lambda: go_left(head), "Left")
 
 while True:
     win.update()
+    score = eat_apple(head, food, snake_body, score, high_score, pen)
 
-    if head.distance(food) < 20:
-        change_food_pos()
-        new_tail = make_turtle_object("cyan", "square")
-        snake_body.append(new_tail)
-        print(snake_body)
+    move_snake_bodies(head, snake_body)
+    if head.xcor() > 240 or head.xcor() < -240 or head.ycor() > 270 or head.ycor() < -280:
+        reset(head, snake_body)
+        score = 0
+    move_snake(head)
+    if check_body_collisions(head, snake_body):
+        score = 0
 
-    for i in range(len(snake_body) - 1, 0, -1):
-        x = snake_body[i - 1].xcor()
-        y = snake_body[i - 1].ycor()
-        snake_body[i].setpos(x, y)
-    if len(snake_body) > 0:
-        xhead = head.xcor()
-        yhead = head.ycor()
-        snake_body[0].setpos(xhead, yhead)
-
-    if head.xcor() > 290 or head.xcor() < -290 or head.ycor() > 290 or head.ycor() < -290:
-        reset()
-
-    move_snake()
-    time.sleep(0.15)
+    wait(0.2)
