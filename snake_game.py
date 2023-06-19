@@ -2,10 +2,17 @@ from snake_game_utils import make_screen, make_turtle_object,\
     change_food_pos, move_snake, go_up, go_down, go_right, go_left,\
     reset, wait, eat_apple, move_snake_bodies, check_body_collisions
 
+def on_close():
+    global running
+    running = False
 snake_body = []
 score = 0
 high_score = 0
 win = make_screen()
+root = win._root
+root.resizable(False, False)
+root.protocol("WM_DELETE_WINDOW", on_close)
+
 head = make_turtle_object("blue", "square")
 food = make_turtle_object("red", "circle")
 change_food_pos(food)
@@ -31,9 +38,12 @@ win.onkey(lambda: go_down(head), "Down")
 win.onkey(lambda: go_right(head), "Right")
 win.onkey(lambda: go_left(head), "Left")
 
-while True:
+
+
+running = True
+while running:
     win.update()
-    score = eat_apple(head, food, snake_body, score, high_score, pen)
+    score,high_score = eat_apple(head, food, snake_body, score, high_score, pen)
 
     move_snake_bodies(head, snake_body)
     if head.xcor() > 240 or head.xcor() < -240 or head.ycor() > 270 or head.ycor() < -280:

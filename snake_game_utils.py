@@ -86,10 +86,12 @@ def eat_apple(head, food, snake_body, score, high_score, pen):
         change_food_pos(food)
         new_tail = make_turtle_object("cyan", "square")
         snake_body.append(new_tail)
+    if score > high_score:
+        high_score = score
     pen.clear()
     pen.write(f"Score : {score}, High Score: {high_score}",
               align="center", font=80)
-    return score
+    return score, high_score
 
 
 def move_snake_bodies(head, snake_body):
