@@ -1,6 +1,4 @@
-from snake_game_utils import make_screen, make_turtle_object,\
-    change_food_pos, move_snake, go_up, go_down, go_right, go_left,\
-    reset, wait, eat_apple, move_snake_bodies, check_body_collisions
+from snake_game_utils import *
 
 def on_close():
     global running
