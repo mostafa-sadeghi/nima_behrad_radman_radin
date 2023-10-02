@@ -1,5 +1,6 @@
 import pygame
 from player import Player
+from game import Game
 
 from config import WINDOW_HEIGHT, WINDOW_WIDTH, FPS
 pygame.init()
@@ -8,6 +9,10 @@ display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 clock = pygame.time.Clock()
 
 my_player = Player()
+monster_group = pygame.sprite.Group()
+
+game = Game(my_player, monster_group)
+game.start_new_level()
 
 running = True
 while running:
@@ -18,5 +23,7 @@ while running:
     display_surface.fill((0, 0, 0))
     my_player.draw(display_surface)
     my_player.move()
+    monster_group.draw(display_surface)
+    monster_group.update()
     pygame.display.update()
     clock.tick(FPS)

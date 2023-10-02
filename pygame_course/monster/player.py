@@ -4,11 +4,12 @@ from config import *
 class Player(Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load("monster/assets/knight.png")
+        self.image = pygame.image.load("assets/knight.png")
         self.rect = self.image.get_rect()
         self.rect.bottom = WINDOW_HEIGHT
         self.rect.centerx = WINDOW_WIDTH/2
         self.velocity = 5
+        self.lives = 3
 
     def move(self):
         keys = pygame.key.get_pressed()
@@ -20,6 +21,5 @@ class Player(Sprite):
             self.rect.x -= self.velocity
         if keys[pygame.K_RIGHT] and self.rect.right < WINDOW_WIDTH:
             self.rect.x += self.velocity
-
     def draw(self, display_surface):
         display_surface.blit(self.image, self.rect)
