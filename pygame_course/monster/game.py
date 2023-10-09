@@ -1,5 +1,7 @@
 import pygame
+from config import *
 from monster import Monster
+from random import randint
 
 
 class Game:
@@ -17,10 +19,26 @@ class Game:
         self.all_monsters = [blue_image,
                              green_image, purple_image, yellow_image]
 
+        self.target_monster_type = randint(0, 3)
+        self.target_monster_image = self.all_monsters[self.target_monster_type]
+        self.target_monster_rect = self.target_monster_image.get_rect()
+        self.target_monster_rect.bottom = 100
+        self.target_monster_rect.centerx = WINDOW_WIDTH/2
+
+    def draw(self, screen):
+        # display game score on the screen
+        # display game level on the screen
+        # display player lives on the screen
+        screen.blit(self.target_monster_image, self.target_monster_rect)
+
     def start_new_level(self):
         self.round_number += 1
         for i in range(self.round_number):
-            self.monster_group.add(Monster(100, 140, self.all_monsters[0], 0))
-            self.monster_group.add(Monster(200, 240, self.all_monsters[1], 1))
-            self.monster_group.add(Monster(300, 340, self.all_monsters[2], 2))
-            self.monster_group.add(Monster(400, 440, self.all_monsters[3], 3))
+            self.monster_group.add(
+                Monster(randint(0, WINDOW_WIDTH - 64), randint(100, WINDOW_HEIGHT - 164), self.all_monsters[0], 0))
+            self.monster_group.add(Monster(randint(
+                0, WINDOW_WIDTH - 64), randint(100, WINDOW_HEIGHT - 164), self.all_monsters[1], 1))
+            self.monster_group.add(Monster(randint(
+                0, WINDOW_WIDTH - 64), randint(100, WINDOW_HEIGHT - 164), self.all_monsters[2], 2))
+            self.monster_group.add(Monster(randint(
+                0, WINDOW_WIDTH - 64), randint(100, WINDOW_HEIGHT - 164), self.all_monsters[3], 3))

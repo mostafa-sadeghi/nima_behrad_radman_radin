@@ -21,6 +21,7 @@ while running:
             running = False
 
     display_surface.fill((0, 0, 0))
+    game.draw(display_surface)
     my_player.draw(display_surface)
     my_player.move()
     monster_group.draw(display_surface)
