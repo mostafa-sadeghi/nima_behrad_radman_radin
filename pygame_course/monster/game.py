@@ -26,6 +26,7 @@ class Game:
         self.target_monster_rect.centerx = WINDOW_WIDTH/2
 
     def draw(self, screen):
+        # TODO
         # display game score on the screen
         # display game level on the screen
         # display player lives on the screen
@@ -42,3 +43,5 @@ class Game:
                 0, WINDOW_WIDTH - 64), randint(100, WINDOW_HEIGHT - 164), self.all_monsters[2], 2))
             self.monster_group.add(Monster(randint(
                 0, WINDOW_WIDTH - 64), randint(100, WINDOW_HEIGHT - 164), self.all_monsters[3], 3))
+
+        # TODO  play start new level sound
