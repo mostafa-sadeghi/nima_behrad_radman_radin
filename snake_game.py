@@ -15,6 +15,9 @@ head = make_turtle_object("blue", "square")
 food = make_turtle_object("red", "circle")
 change_food_pos(food)
 
+bomb = make_turtle_object("darkgreen", "circle")
+change_food_pos(bomb)
+
 pen = make_turtle_object(color="white")
 pen.hideturtle()
 pen.goto(0, 260)
@@ -43,10 +46,22 @@ while running:
     win.update()
     score,high_score = eat_apple(head, food, snake_body, score, high_score, pen)
 
+    if head.distance(bomb)<20:
+        score -= 1
+        change_food_pos(bomb)
+        if len(snake_body)>0:
+            snake_body[-1].ht()
+            del snake_body[-1]
+
     move_snake_bodies(head, snake_body)
-    if head.xcor() > 240 or head.xcor() < -240 or head.ycor() > 270 or head.ycor() < -280:
-        reset(head, snake_body)
-        score = 0
+    # if head.xcor() > 240 or head.xcor() < -240 or head.ycor() > 270 or head.ycor() < -280:
+    #     reset(head, snake_body)
+    #     score = 0
+
+    if head.xcor() > 280:
+        head.setx(-280)
+
+
     move_snake(head)
     if check_body_collisions(head, snake_body):
         score = 0
