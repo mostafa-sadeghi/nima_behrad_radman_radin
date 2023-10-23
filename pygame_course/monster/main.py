@@ -19,9 +19,13 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                my_player.escape()
 
     display_surface.fill((0, 0, 0))
     game.draw(display_surface)
+    game.update()
     my_player.draw(display_surface)
     my_player.move()
     monster_group.draw(display_surface)
