@@ -54,7 +54,12 @@ class Game:
         # display game score on the screen
         # display game level on the screen
         # display player lives on the screen
-
+        COLORS = (
+            (0, 0, 255),
+            (0, 255, 0),
+            (255, 0, 255),
+            (255, 255, 0),
+        )
         score_text = self.font.render(
             f'Score:{self.score}', True, (255, 255, 255))
         score_rect = score_text.get_rect()
@@ -74,6 +79,8 @@ class Game:
         screen.blit(lives_text, lives_rect)
         screen.blit(escape_text, escape_rect)
         screen.blit(self.target_monster_image, self.target_monster_rect)
+        pygame.draw.rect(screen, COLORS[self.target_monster_type],
+                         (0, 100, WINDOW_WIDTH, WINDOW_HEIGHT-200), 4)
 
     def start_new_level(self):
         self.round_number += 1
