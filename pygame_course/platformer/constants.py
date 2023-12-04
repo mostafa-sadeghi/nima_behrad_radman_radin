@@ -6,5 +6,6 @@ SCREEN_HEIGHT = screen.get_height()
 FPS = 60
 TILE_SIZE = 32
 
-print(SCREEN_WIDTH/TILE_SIZE)
-print(SCREEN_HEIGHT/TILE_SIZE)
+DIRT_IMG = pygame.image.load("assets/dirt.png")
+GRASS_IMG = pygame.image.load("assets/grass.png")
+WATER_IMG = pygame.image.load("assets/water.png")
